@@ -31,7 +31,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper,{
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad,
-      click: true
+      click: true,
     })
     this.scroll.on('scroll',position => {
       this.$emit('scroll',position)
@@ -42,10 +42,13 @@ export default {
   },
   methods: {
     scrollTo(x,y,time=300) {
-      this.scroll.scrollTo(x,y,time)
+      this.scroll && this.scroll.scrollTo(x,y,time)
     },
     finishPullUp() {
       this.scroll.finishPullUp()
+    },
+    refresh() {
+      this.scroll && this.scroll.refresh()
     }
   }
 }

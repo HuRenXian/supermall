@@ -2,7 +2,7 @@
   <swiper>
     <swiper-item v-for="banner in banners">
       <a :href="banner.link">
-        <img :src="banner.image" alt="">
+        <img :src="banner.image" alt="" @load="imageLoadFinished">
       </a>
     </swiper-item>
   </swiper>
@@ -19,6 +19,19 @@ export default {
   },
   props: {
     banners: Array
+  },
+  data() {
+    return {
+      isLoad: false
+    }
+  },
+  methods: {
+    imageLoadFinished() {
+      if (!this.isLoad) {
+        this.$emit('swiperImageLoad')
+        this.isLoad = true
+      }
+    }
   }
 }
 </script>
